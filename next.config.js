@@ -5,6 +5,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
+    // Skip Next.js image proxy in development — the local TLS cert blocks
+    // server-to-Unsplash requests. Vercel production uses full optimization.
+    unoptimized: process.env.NODE_ENV === 'development',
     remotePatterns: [
       {
         protocol: 'https',
@@ -14,5 +17,7 @@ const nextConfig = {
     ],
   },
 }
+
+module.exports = nextConfig
 
 module.exports = nextConfig

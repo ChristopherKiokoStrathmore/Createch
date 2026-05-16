@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { Preloader } from '@/components/sections/Preloader'
 import { Navbar } from '@/components/sections/Navbar'
@@ -20,6 +20,21 @@ import { Footer } from '@/components/sections/Footer'
 
 export default function Home() {
   const [preloaderDone, setPreloaderDone] = useState(false)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const tag = (e.target as HTMLElement).tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return
+      if (e.key !== 'f' && e.key !== 'F') return
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {})
+      } else {
+        document.exitFullscreen().catch(() => {})
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [])
 
   return (
     <>

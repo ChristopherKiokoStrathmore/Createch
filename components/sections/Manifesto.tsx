@@ -1,7 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 const WORDS = [
   'The', 'measure', 'of', 'great', 'architecture', "isn't", 'how', 'it',
@@ -9,19 +8,26 @@ const WORDS = [
   'to', 'come', 'home.',
 ]
 
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.055, delayChildren: 0.1 },
+  },
+}
+
+const wordVariant = {
+  hidden: { opacity: 0.06, y: 14, color: 'rgba(255,255,255,0.08)' },
+  visible: (isLastWord: boolean) => ({
+    opacity: 1,
+    y: 0,
+    color: isLastWord ? '#EF9F27' : 'rgba(255,255,255,0.92)',
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+  }),
+}
+
 export function Manifesto() {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start end', 'end start'],
-  })
-
   return (
-    <section
-      ref={containerRef}
-      className="bg-ink py-28 md:py-40 px-6 md:px-10 lg:px-16 overflow-hidden"
-    >
+    <section className="bg-ink py-24 md:py-32 px-6 md:px-10 lg:px-16">
       <div className="max-w-screen-xl mx-auto">
         {/* Label */}
         <motion.div
@@ -29,37 +35,43 @@ export function Manifesto() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mb-12 md:mb-16"
+          className="mb-10 md:mb-14"
         >
           <span className="font-body text-white/20 text-[10px] tracking-[0.3em] uppercase">
             Our Belief
           </span>
         </motion.div>
 
-        {/* Word-by-word reveal */}
-        <p
-          className="font-display font-bold text-white/10 leading-tight tracking-tight"
+        {/* Staggered word reveal — fires once section enters viewport */}
+        <motion.p
+          variants={container}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+          className="font-display font-bold leading-tight tracking-tight"
           style={{ fontSize: 'clamp(2.2rem, 5.5vw, 6rem)' }}
           aria-label={WORDS.join(' ')}
         >
           {WORDS.map((word, i) => (
-            <ManifestoWord
+            <motion.span
               key={i}
-              word={word}
-              index={i}
-              total={WORDS.length}
-              scrollYProgress={scrollYProgress}
-            />
+              custom={word === 'home.'}
+              variants={wordVariant}
+              style={{ display: 'inline-block', marginRight: '0.3em' }}
+              className="will-change-transform"
+            >
+              {word}
+            </motion.span>
           ))}
-        </p>
+        </motion.p>
 
         {/* Attribution */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-16 md:mt-20 flex items-center gap-4"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-14 md:mt-20 flex items-center gap-4"
         >
           <div className="h-px w-12 bg-gold" />
           <span className="font-body font-light text-white/30 text-sm tracking-wider">
@@ -68,37 +80,5 @@ export function Manifesto() {
         </motion.div>
       </div>
     </section>
-  )
-}
-
-function ManifestoWord({
-  word,
-  index,
-  total,
-  scrollYProgress,
-}: {
-  word: string
-  index: number
-  total: number
-  scrollYProgress: ReturnType<typeof useScroll>['scrollYProgress']
-}) {
-  const start = 0.1 + (index / total) * 0.55
-  const end = start + 0.18
-
-  const opacity = useTransform(scrollYProgress, [start, end], [0.08, 1])
-  const y = useTransform(scrollYProgress, [start, end], [12, 0])
-  const color = useTransform(
-    scrollYProgress,
-    [start, end],
-    ['rgba(255,255,255,0.08)', word === 'home.' ? '#EF9F27' : 'rgba(255,255,255,0.95)']
-  )
-
-  return (
-    <motion.span
-      style={{ opacity, y, color, display: 'inline-block', marginRight: '0.3em' }}
-      className="will-change-transform"
-    >
-      {word}
-    </motion.span>
   )
 }

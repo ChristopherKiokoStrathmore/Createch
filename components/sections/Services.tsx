@@ -92,8 +92,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
       <span
         ref={numberRef}
-        className="font-display font-black text-stone leading-none mb-6 select-none"
-        style={{ fontSize: 'clamp(4rem, 8vw, 8rem)' }}
+        className="font-display font-black leading-none mb-6 select-none"
+        style={{ fontSize: 'clamp(4rem, 8vw, 8rem)', color: 'rgba(239,159,39,0.18)' }}
         aria-hidden="true"
       >
         00
