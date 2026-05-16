@@ -1,12 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
 
 type CursorState = 'default' | 'hover' | 'view'
 
 export function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null)
   const [state, setState] = useState<CursorState>('default')
   const [isVisible, setIsVisible] = useState(false)
   const [isMobile, setIsMobile] = useState(true)
@@ -14,19 +13,17 @@ export function CustomCursor() {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const springConfig = { stiffness: 500, damping: 40, mass: 0.5 }
-  const cursorX = useSpring(mouseX, springConfig)
-  const cursorY = useSpring(mouseY, springConfig)
+  const cursorX = useSpring(mouseX, { stiffness: 500, damping: 40, mass: 0.5 })
+  const cursorY = useSpring(mouseY, { stiffness: 500, damping: 40, mass: 0.5 })
 
-  const slowSpringConfig = { stiffness: 150, damping: 20, mass: 0.8 }
-  const followerX = useSpring(mouseX, slowSpringConfig)
-  const followerY = useSpring(mouseY, slowSpringConfig)
+  const followerX = useSpring(mouseX, { stiffness: 150, damping: 20, mass: 0.8 })
+  const followerY = useSpring(mouseY, { stiffness: 150, damping: 20, mass: 0.8 })
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
   }, [])
 
   useEffect(() => {
@@ -36,6 +33,16 @@ export function CustomCursor() {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
       setIsVisible(true)
+
+      // Delegated state — no per-element listeners, no MutationObserver
+      const target = e.target as HTMLElement
+      if (target.closest('[data-cursor="view"]')) {
+        setState('view')
+      } else if (target.closest('a, button, [data-cursor="hover"]')) {
+        setState('hover')
+      } else {
+        setState('default')
+      }
     }
 
     const handleLeave = () => setIsVisible(false)
@@ -45,101 +52,50 @@ export function CustomCursor() {
     document.addEventListener('mouseleave', handleLeave)
     document.addEventListener('mouseenter', handleEnter)
 
-    const interactiveEls = () =>
-      document.querySelectorAll('a, button, [data-cursor="hover"]')
-    const viewEls = () => document.querySelectorAll('[data-cursor="view"]')
-
-    const enterHover = () => setState('hover')
-    const enterView = () => setState('view')
-    const leaveInteractive = () => setState('default')
-
-    const observe = (root: Document | Element) => {
-      interactiveEls().forEach((el) => {
-        el.addEventListener('mouseenter', enterHover)
-        el.addEventListener('mouseleave', leaveInteractive)
-      })
-      viewEls().forEach((el) => {
-        el.addEventListener('mouseenter', enterView)
-        el.addEventListener('mouseleave', leaveInteractive)
-      })
-    }
-
-    observe(document)
-
-    const mutationObserver = new MutationObserver(() => observe(document))
-    mutationObserver.observe(document.body, { childList: true, subtree: true })
-
     return () => {
       document.removeEventListener('mousemove', handleMove)
       document.removeEventListener('mouseleave', handleLeave)
       document.removeEventListener('mouseenter', handleEnter)
-      mutationObserver.disconnect()
     }
   }, [isMobile, mouseX, mouseY])
 
   if (isMobile) return null
 
-  const dotSize = state === 'default' ? 10 : 0
-  const ringSize = state === 'default' ? 0 : 48
-
   return (
     <>
+      {/* Dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[99999]"
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: '-50%',
-          translateY: '-50%',
+        className="fixed top-0 left-0 pointer-events-none z-[99999] rounded-full bg-white"
+        style={{ x: cursorX, y: cursorY, translateX: '-50%', translateY: '-50%' }}
+        animate={{
+          opacity: isVisible && state === 'default' ? 1 : 0,
+          width: state === 'default' ? 10 : 0,
+          height: state === 'default' ? 10 : 0,
         }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
-        transition={{ duration: 0.15 }}
-      >
-        <motion.div
-          className="rounded-full bg-white"
-          animate={{
-            width: dotSize,
-            height: dotSize,
-            opacity: state === 'default' ? 1 : 0,
-          }}
-          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-        />
-      </motion.div>
+        transition={{ duration: 0.2 }}
+      />
 
+      {/* Ring — no mixBlendMode to avoid full-page compositing */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[99998]"
-        style={{
-          x: followerX,
-          y: followerY,
-          translateX: '-50%',
-          translateY: '-50%',
+        className="fixed top-0 left-0 pointer-events-none z-[99998] rounded-full border border-white flex items-center justify-center overflow-hidden"
+        style={{ x: followerX, y: followerY, translateX: '-50%', translateY: '-50%' }}
+        animate={{
+          opacity: isVisible && state !== 'default' ? 1 : 0,
+          width: state !== 'default' ? 48 : 0,
+          height: state !== 'default' ? 48 : 0,
+          backgroundColor: state !== 'default' ? 'rgba(255,255,255,0.15)' : 'transparent',
         }}
-        animate={{ opacity: isVisible ? 1 : 0 }}
-        transition={{ duration: 0.15 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
-        <motion.div
-          className="rounded-full border border-white flex items-center justify-center overflow-hidden"
-          style={{ mixBlendMode: 'difference' }}
-          animate={{
-            width: ringSize,
-            height: ringSize,
-            opacity: state !== 'default' ? 1 : 0,
-            backgroundColor: state !== 'default' ? 'white' : 'transparent',
-          }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        >
-          {state === 'view' && (
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              className="text-[9px] font-body font-medium tracking-widest text-ink uppercase whitespace-nowrap"
-              style={{ mixBlendMode: 'normal', color: '#0D0D0D' }}
-            >
-              VIEW
-            </motion.span>
-          )}
-        </motion.div>
+        {state === 'view' && (
+          <motion.span
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="text-[9px] font-body font-medium tracking-widest text-white uppercase whitespace-nowrap"
+          >
+            VIEW
+          </motion.span>
+        )}
       </motion.div>
     </>
   )
