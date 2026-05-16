@@ -102,10 +102,11 @@ export function Process() {
     offset: ['start start', 'end end'],
   })
 
+  // Steps are min-w-[50vw], starting at 10vw padding → total content ≈ 260vw, viewport = 100vw → max shift ≈ 160vw
   const x = useTransform(
     scrollYProgress,
     [0, 1],
-    ['0vw', `-${(processSteps.length - 1) * 100}vw`]
+    ['0vw', `-${(processSteps.length - 1) * 50 - 40}vw`]
   )
 
   return (
@@ -123,18 +124,16 @@ export function Process() {
               How We Work
             </span>
           </motion.div>
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: '105%' }}
-              whileInView={{ y: 0 }}
-              viewport={viewportConfig}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-display font-bold text-ink leading-tight tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}
-            >
-              From Brief to Built
-            </motion.h2>
-          </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="font-display font-bold text-ink leading-tight tracking-tight"
+            style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}
+          >
+            From Brief to Built
+          </motion.h2>
         </motion.div>
       </div>
 
@@ -154,7 +153,7 @@ export function Process() {
       <div
         ref={containerRef}
         className="hidden md:block relative"
-        style={{ height: `${processSteps.length * 100}vh` }}
+        style={{ height: `${processSteps.length * 60}vh` }}
         aria-hidden="false"
       >
         <div

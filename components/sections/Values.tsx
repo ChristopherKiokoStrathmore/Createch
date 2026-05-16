@@ -105,18 +105,16 @@ export function Values() {
               Our Principals
             </span>
           </motion.div>
-          <div className="overflow-hidden">
-            <motion.h2
-              initial={{ y: '105%' }}
-              whileInView={{ y: 0 }}
-              viewport={viewportConfig}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="font-display font-bold text-ink leading-tight tracking-tight"
-              style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}
-            >
-              What Drives Our Practice
-            </motion.h2>
-          </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            className="font-display font-bold text-ink leading-tight tracking-tight"
+            style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}
+          >
+            What Drives Our Practice
+          </motion.h2>
         </motion.div>
 
         <motion.div

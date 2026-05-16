@@ -254,18 +254,17 @@ export function Contact() {
             </span>
           </motion.div>
           {['Start Your', 'Project'].map((word, i) => (
-            <div key={i} className="overflow-hidden">
-              <motion.div
-                initial={{ y: '110%' }}
-                whileInView={{ y: 0 }}
-                viewport={viewportConfig}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: i * 0.12 }}
-                className="font-display font-black text-ink leading-tight tracking-tight"
-                style={{ fontSize: 'clamp(3rem, 7vw, 7.5rem)' }}
-              >
-                {word}
-              </motion.div>
-            </div>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: i * 0.12 }}
+              className="font-display font-black text-ink leading-tight tracking-tight"
+              style={{ fontSize: 'clamp(3rem, 7vw, 7.5rem)' }}
+            >
+              {word}
+            </motion.div>
           ))}
           <motion.p
             initial={{ opacity: 0, y: 16 }}

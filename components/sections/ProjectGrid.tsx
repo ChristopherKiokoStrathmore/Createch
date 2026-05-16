@@ -25,18 +25,16 @@ export function ProjectGrid() {
             </span>
           </motion.div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ y: '105%' }}
-                whileInView={{ y: 0 }}
-                viewport={viewportConfig}
-                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                className="font-display font-bold text-white leading-tight tracking-tight"
-                style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}
-              >
-                Built Across Africa
-              </motion.h2>
-            </div>
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="font-display font-bold text-white leading-tight tracking-tight"
+              style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}
+            >
+              Built Across Africa
+            </motion.h2>
             <motion.a
               variants={fadeInUp}
               href="#contact"

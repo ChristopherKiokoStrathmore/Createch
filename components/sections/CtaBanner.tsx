@@ -29,18 +29,17 @@ export function CtaBanner() {
             </motion.div>
 
             {['Have a project', "in mind? Let's", 'talk.'].map((line, i) => (
-              <div key={i} className="overflow-hidden">
-                <motion.div
-                  initial={{ y: '110%' }}
-                  whileInView={{ y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: i * 0.12 }}
-                  className="font-display font-black text-ink leading-[0.9] tracking-tight"
-                  style={{ fontSize: 'clamp(2.8rem, 7vw, 8rem)' }}
-                >
-                  {line}
-                </motion.div>
-              </div>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: i * 0.12 }}
+                className="font-display font-black text-ink leading-[0.9] tracking-tight"
+                style={{ fontSize: 'clamp(2.8rem, 7vw, 8rem)' }}
+              >
+                {line}
+              </motion.div>
             ))}
           </div>
 

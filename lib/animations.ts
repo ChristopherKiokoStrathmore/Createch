@@ -154,5 +154,5 @@ export const mobileMenuLinks: Variants = {
 
 export const viewportConfig = {
   once: true,
-  margin: '-100px',
+  margin: '0px',
 } as const

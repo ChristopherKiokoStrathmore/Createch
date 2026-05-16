@@ -79,18 +79,16 @@ export function FeaturedProject() {
           </span>
         </motion.div>
 
-        <div className="overflow-hidden mb-4">
-          <motion.h2
-            initial={{ y: '110%' }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display font-black text-white leading-tight tracking-tight"
-            style={{ fontSize: 'clamp(2.5rem, 6vw, 7rem)' }}
-          >
-            {featuredProject.name}
-          </motion.h2>
-        </div>
+        <motion.h2
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-display font-black text-white leading-tight tracking-tight mb-4"
+          style={{ fontSize: 'clamp(2.5rem, 6vw, 7rem)' }}
+        >
+          {featuredProject.name}
+        </motion.h2>
 
         <motion.div
           initial={{ opacity: 0, y: 16 }}
