@@ -198,7 +198,7 @@ export function Navbar() {
             {/* Mobile footer */}
             <div className="mt-auto space-y-1">
               <p className="font-body text-white/25 text-sm">hello@createch.co.ke</p>
-              <p className="font-body text-white/25 text-sm">+254 700 000 000</p>
+              <p className="font-body text-white/25 text-sm">+254 733 622 848</p>
             </div>
           </motion.div>
         )}

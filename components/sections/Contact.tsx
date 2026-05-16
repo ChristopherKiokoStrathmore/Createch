@@ -355,7 +355,7 @@ export function Contact() {
                 <ScrambleText text="hello@createch.co.ke" className="cursor-pointer" />
               </a>
               <p className="font-body font-light text-ink/50 text-base">
-                +254 700 000 000
+                +254 733 622 848
               </p>
             </motion.div>
 
@@ -372,7 +372,7 @@ export function Contact() {
 
             <motion.div variants={fadeInUp}>
               <a
-                href="https://wa.me/254700000000"
+                href="https://wa.me/254733622848"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 px-6 py-3.5 bg-[#25D366] text-white font-body text-sm font-medium tracking-wider hover:bg-[#1da851] transition-colors duration-300"

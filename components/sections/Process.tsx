@@ -112,7 +112,7 @@ export function Process() {
   return (
     <section id="process" className="bg-white">
       {/* Header */}
-      <div className="px-6 md:px-10 lg:px-16 pt-24 md:pt-36 pb-12 max-w-screen-xl mx-auto">
+      <div className="px-6 md:px-10 lg:px-16 pt-24 md:pt-36 pb-4 max-w-screen-xl mx-auto">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

@@ -155,7 +155,7 @@ export function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-          className="font-display font-bold text-ink leading-tight tracking-tight mb-16 md:mb-20"
+          className="font-display font-bold text-ink leading-tight tracking-tight mb-8 md:mb-10"
           style={{ fontSize: 'clamp(2rem, 4vw, 4.5rem)' }}
         >
           Three Ways We Build

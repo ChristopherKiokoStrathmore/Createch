@@ -98,8 +98,8 @@ export function Footer() {
                 <a href="mailto:hello@createch.co.ke" className="font-body font-light text-white/45 text-sm hover:text-gold transition-colors duration-300 block">
                   hello@createch.co.ke
                 </a>
-                <a href="tel:+254700000000" className="font-body font-light text-white/45 text-sm hover:text-gold transition-colors duration-300 block">
-                  +254 700 000 000
+                <a href="tel:+254733622848" className="font-body font-light text-white/45 text-sm hover:text-gold transition-colors duration-300 block">
+                  +254 733 622 848
                 </a>
               </div>
               <div>

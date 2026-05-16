@@ -71,7 +71,7 @@ export function CtaBanner() {
               </MagneticButton>
             </div>
             <p className="font-body text-ink/35 text-xs tracking-wider">
-              hello@createch.co.ke · +254 700 000 000
+              hello@createch.co.ke · +254 733 622 848
             </p>
           </motion.div>
         </div>

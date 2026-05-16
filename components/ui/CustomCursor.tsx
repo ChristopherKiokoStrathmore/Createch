@@ -65,7 +65,7 @@ export function CustomCursor() {
     <>
       {/* Dot */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[99999] rounded-full bg-white"
+        className="fixed top-0 left-0 pointer-events-none z-[99999] rounded-full bg-gold"
         style={{ x: cursorX, y: cursorY, translateX: '-50%', translateY: '-50%' }}
         animate={{
           opacity: isVisible && state === 'default' ? 1 : 0,
@@ -77,13 +77,13 @@ export function CustomCursor() {
 
       {/* Ring — no mixBlendMode to avoid full-page compositing */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[99998] rounded-full border border-white flex items-center justify-center overflow-hidden"
+        className="fixed top-0 left-0 pointer-events-none z-[99998] rounded-full border border-gold flex items-center justify-center overflow-hidden"
         style={{ x: followerX, y: followerY, translateX: '-50%', translateY: '-50%' }}
         animate={{
           opacity: isVisible && state !== 'default' ? 1 : 0,
           width: state !== 'default' ? 48 : 0,
           height: state !== 'default' ? 48 : 0,
-          backgroundColor: state !== 'default' ? 'rgba(255,255,255,0.15)' : 'transparent',
+          backgroundColor: state !== 'default' ? 'rgba(239,159,39,0.15)' : 'transparent',
         }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
@@ -91,7 +91,7 @@ export function CustomCursor() {
           <motion.span
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="text-[9px] font-body font-medium tracking-widest text-white uppercase whitespace-nowrap"
+            className="text-[9px] font-body font-medium tracking-widest text-gold uppercase whitespace-nowrap"
           >
             VIEW
           </motion.span>
