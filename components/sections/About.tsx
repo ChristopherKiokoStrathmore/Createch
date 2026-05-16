@@ -102,7 +102,6 @@ export function About() {
               <br />
               Built for Africa.
             </motion.h2>
-            </div>
 
             <motion.p variants={fadeInUp} className="font-body font-light text-ink/65 text-lg leading-[1.85] mb-5">
               Createch Architects is a Nairobi-based practice delivering architecture,
