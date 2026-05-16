@@ -35,7 +35,7 @@ export function Testimonials() {
   }
 
   return (
-    <section className="bg-white py-28 md:py-44 px-6 md:px-10 lg:px-16 overflow-hidden">
+    <section className="bg-white min-h-screen flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-screen-xl mx-auto">
         <motion.div
           variants={staggerContainer}

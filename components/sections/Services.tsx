@@ -136,7 +136,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
 export function Services() {
   return (
-    <section id="services" className="bg-white py-24 md:py-36 px-6 md:px-10 lg:px-16">
+    <section id="services" className="bg-white min-h-screen flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 lg:px-16">
       <motion.div
         variants={staggerContainer}
         initial="hidden"

@@ -5,7 +5,7 @@ import { MagneticButton } from '@/components/ui/MagneticButton'
 
 export function CtaBanner() {
   return (
-    <section className="bg-gold py-24 md:py-36 px-6 md:px-10 lg:px-16 overflow-hidden relative">
+    <section className="bg-gold min-h-screen flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 lg:px-16 overflow-hidden relative">
       {/* Subtle background texture */}
       <div
         className="absolute inset-0 opacity-[0.06] grain-overlay pointer-events-none"

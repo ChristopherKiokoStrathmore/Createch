@@ -239,10 +239,10 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-white py-24 md:py-36 px-6 md:px-10 lg:px-16">
+    <section id="contact" className="bg-white min-h-screen flex flex-col justify-center py-10 md:py-14 px-6 md:px-10 lg:px-16">
       <div className="max-w-screen-xl mx-auto">
         {/* Heading */}
-        <div className="mb-16 md:mb-20">
+        <div className="mb-10 md:mb-12">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -261,7 +261,7 @@ export function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: i * 0.12 }}
               className="font-display font-black text-ink leading-tight tracking-tight"
-              style={{ fontSize: 'clamp(3rem, 7vw, 7.5rem)' }}
+              style={{ fontSize: 'clamp(2.2rem, 4.5vw, 5rem)' }}
             >
               {word}
             </motion.div>

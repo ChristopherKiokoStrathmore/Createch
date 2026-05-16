@@ -27,7 +27,7 @@ const wordVariant = {
 
 export function Manifesto() {
   return (
-    <section className="bg-ink py-24 md:py-32 px-6 md:px-10 lg:px-16">
+    <section className="bg-ink min-h-screen flex flex-col justify-center py-16 md:py-20 px-6 md:px-10 lg:px-16">
       <div className="max-w-screen-xl mx-auto">
         {/* Label */}
         <motion.div

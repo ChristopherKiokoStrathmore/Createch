@@ -9,7 +9,7 @@ export function ProjectGrid() {
   const [p1, p2, p3, p4, p5] = projects
 
   return (
-    <section id="projects" className="bg-ink py-24 md:py-36 px-6 md:px-10 lg:px-16">
+    <section id="projects" className="bg-ink min-h-screen flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 lg:px-16">
       <div className="max-w-screen-xl mx-auto">
         {/* Header */}
         <motion.div

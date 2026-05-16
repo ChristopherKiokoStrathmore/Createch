@@ -6,6 +6,11 @@ import { useAnimationFrame } from 'framer-motion'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const LenisContext = createContext<any>(null)
 
+// Module-level ref so ScrollSnap can access Lenis without React context timing issues
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let _lenis: any = null
+export function getLenis() { return _lenis }
+
 export function useLenis() {
   return useContext(LenisContext)
 }
@@ -18,7 +23,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
     const init = async () => {
       const LenisModule = await import('lenis')
       const Lenis = LenisModule.default
-      lenisRef.current = new Lenis({
+      _lenis = new Lenis({
         lerp: 0.08,
         duration: 1.4,
         easing: (t: number) =>
@@ -27,11 +32,13 @@ export function LenisProvider({ children }: { children: ReactNode }) {
         wheelMultiplier: 1,
         touchMultiplier: 2,
       })
+      lenisRef.current = _lenis
     }
     init()
     return () => {
       lenisRef.current?.destroy()
       lenisRef.current = null
+      _lenis = null
     }
   }, [])
 

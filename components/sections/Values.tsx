@@ -91,7 +91,7 @@ function ValueCard({ value, index }: ValueCardProps) {
 
 export function Values() {
   return (
-    <section className="bg-white py-24 md:py-36 px-6 md:px-10 lg:px-16">
+    <section className="bg-white min-h-screen flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 lg:px-16">
       <div className="max-w-screen-xl mx-auto">
         <motion.div
           variants={staggerContainer}

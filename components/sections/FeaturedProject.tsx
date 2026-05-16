@@ -21,7 +21,7 @@ export function FeaturedProject() {
     <section
       ref={sectionRef}
       className="relative bg-ink overflow-hidden"
-      style={{ height: 'min(90vh, 860px)' }}
+      style={{ minHeight: '100vh' }}
     >
       {/* Full-bleed image with parallax */}
       <div className="absolute inset-0">

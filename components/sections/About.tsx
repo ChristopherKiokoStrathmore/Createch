@@ -73,7 +73,7 @@ function AnimatedStat({ value, suffix, label, index }: StatProps) {
 
 export function About() {
   return (
-    <section id="about" className="bg-white py-24 md:py-36 px-6 md:px-10 lg:px-16 overflow-hidden">
+    <section id="about" className="bg-white min-h-screen flex flex-col justify-center py-12 md:py-16 px-6 md:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
 

@@ -17,6 +17,7 @@ import { Testimonials } from '@/components/sections/Testimonials'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/sections/Footer'
+import { ScrollSnap } from '@/components/ui/ScrollSnap'
 
 export default function Home() {
   const [preloaderDone, setPreloaderDone] = useState(false)
@@ -44,6 +45,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
+      <ScrollSnap />
       <Navbar />
 
       <main>
