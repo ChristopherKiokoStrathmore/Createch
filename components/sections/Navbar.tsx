@@ -65,17 +65,14 @@ export function Navbar() {
       <motion.header
         animate={scrolled ? 'filled' : 'transparent'}
         variants={{
-          transparent: {
-            backgroundColor: 'rgba(13,13,13,0)',
-            backdropFilter: 'blur(0px)',
-          },
-          filled: {
-            backgroundColor: 'rgba(250,250,248,0.96)',
-            backdropFilter: 'blur(12px)',
-          },
+          transparent: { backgroundColor: 'rgba(13,13,13,0)' },
+          filled:      { backgroundColor: 'rgba(250,250,248,0.96)' },
         }}
         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-14"
+        className={cn(
+          'fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-14',
+          scrolled && 'backdrop-blur-md'
+        )}
       >
         <div className="flex items-center justify-between h-[68px] md:h-20">
 

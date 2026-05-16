@@ -35,7 +35,7 @@ export function Hero({ isReady }: HeroProps) {
   return (
     <section
       id="hero"
-      className="relative min-h-[100svh] bg-ink flex flex-col justify-end pb-16 md:pb-20 overflow-hidden"
+      className="relative min-h-[100svh] bg-ink flex flex-col justify-end pb-16 md:pb-20 overflow-hidden isolate"
     >
       {/* Background architectural photograph */}
       <div className="absolute inset-0 z-0">
